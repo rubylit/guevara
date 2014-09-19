@@ -1,7 +1,7 @@
 require "bundler/gem_tasks"
 
 task :test do
-  exec "cutest ./test/*_test.rb"
+  exec "cutest -r ./test/helper.rb ./test/test_*.rb"
 end
 
 task :default => :test
