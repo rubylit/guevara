@@ -21,6 +21,7 @@ end
 
 def sample_options
   {
+    :service_class  => '200',
     :routing_number => '12345678',
     :company_name   => 'rubylit',
     :company_id     => 'Ruby123',

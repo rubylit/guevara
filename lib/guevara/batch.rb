@@ -6,12 +6,13 @@ module Guevara
     ACCOUNT_TYPE_CODE     = { 'checking' => '2', 'saving' => '3' }
     TRANSACTION_TYPE_CODE = { 'credit' => '2', 'debit' => '7' }
 
-    attr_reader :service_class, :options, :transactions
+    attr_reader :options, :transactions
 
     def initialize(transactions, options)
-      @service_class  = 200
-      @options        = options
-      @transactions   = transactions
+      @transactions            = transactions
+      @options                 = { discretionary_data: nil }.merge(options)
+      @options[:date]           = Date.parse(options[:date]).strftime("%y%m%d")
+      @options[:effective_date] = effective_date.strftime("%y%m%d")
     end
 
     def to_s
@@ -23,15 +24,16 @@ module Guevara
     end
 
     def batch_header
-      format "5%3d%-16.16s%-20.20s%10.10sPPD          %s%s   1%8d%07d",
-        service_class,
-        options[:company_name],
-        '', # company discretionary data
-        options[:company_id],
-        Date.parse(options[:date]).strftime("%y%m%d"),
-        effective_date.strftime("%y%m%d"),
-        options[:routing_number],
-        options[:index]
+      format ["5",
+              "%<service_class>3d",
+              "%<company_name>-16.16s",
+              "%<discretionary_data>-20.20s",
+              "%<company_id>10.10s",
+              "PPD          ",
+              "%<date>s%<effective_date>s",
+              "   1",
+              "%<routing_number>8d",
+              "%<index>07d"].join, options
     end
 
     def entry_detail transaction, index
