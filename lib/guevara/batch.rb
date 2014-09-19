@@ -9,10 +9,17 @@ module Guevara
     attr_reader :options, :transactions
 
     def initialize(transactions, options)
-      @transactions            = transactions
-      @options                 = { discretionary_data: nil }.merge(options)
-      @options[:date]           = Date.parse(options[:date]).strftime("%y%m%d")
-      @options[:effective_date] = effective_date.strftime("%y%m%d")
+      @transactions = transactions
+      self.options  = options
+    end
+
+    def options= options
+      default_options = {
+        discretionary_data: nil,
+        effective_date:     effective_date.strftime("%y%m%d")
+      }
+      @options = default_options.merge(options)
+      @options[:date] = Date.parse(options[:date]).strftime("%y%m%d")
     end
 
     def to_s
