@@ -5,8 +5,9 @@
 
 # Guevara
 
+
 Nacha file format is a pain, but with this gem the life will be easier
-and the sun will shine for you :).
+and the sun will shine for you :). [![Nacha Guevara](http://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Nacha_Guevara.jpg/289px-Nacha_Guevara.jpg)](http://es.wikipedia.org/wiki/Nacha_Guevara)
 
 ## Installation
 
