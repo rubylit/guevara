@@ -22,8 +22,8 @@ def debugger_equal value, other
 Output is not as Expected
 # #{ %w[ 0 1 2 3 4 5 6 7 8 9 ].map { |i| i.to_s * 10 }.join('')[1..-1] }
 # #{ '1234567890' * 10 }
-O #{ value }
-E #{ other }
+O#{ value.inspect }
+E#{ other.inspect }
 
 DEBUG
   success
