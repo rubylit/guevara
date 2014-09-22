@@ -24,7 +24,8 @@ module Guevara
               "%<id>-15.15s",
               "%<full_name>-22.22s",
               "  1%<signature_routing_number>8d",
-              "%<index>07d"].join, transaction
+              "%<index>07d",
+              "\n"].join, transaction
     end
 
     def transaction_code

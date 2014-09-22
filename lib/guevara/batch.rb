@@ -1,3 +1,4 @@
+require_relative 'entry'
 require 'date'
 
 module Guevara
@@ -24,10 +25,10 @@ module Guevara
 
     def to_s
       batch = [ batch_header ]
-      transactions.each_with_index do |transaction, index|
-        batch << entry_detail(transaction, index)
+      entries.each do |entry|
+        batch << entry.to_s
       end
-      batch.join("\n")
+      batch.join
     end
 
     def batch_header
@@ -40,26 +41,20 @@ module Guevara
               "%<date>s%<effective_date>s",
               "   1",
               "%<routing_number>8d",
-              "%<index>07d"].join, options
-    end
-
-    def entry_detail transaction, index
-      transaction_code =
-        ACCOUNT_TYPE_CODE[transaction[:account_type]] +
-        TRANSACTION_TYPE_CODE[transaction[:type]]
-      format "6%2d%9d%-17.17s%010d%-15.15s%-22.22s  1%8d%07d",
-        transaction_code,
-        transaction[:routing_number],
-        transaction[:account_number],
-        transaction[:amount],
-        transaction[:id],
-        "#{ transaction[:first_name] } #{ transaction[:last_name] }",
-        options[:routing_number],
-        index + 1
+              "%<index>07d",
+              "\n"].join, options
     end
 
     def effective_date
       Date.parse transactions.first[:effective_date]
+    end
+
+    def entries
+      @entries ||= transactions.each_with_index.map do |transaction, index|
+        t = transaction.merge index: index + 1,
+                              signature_routing_number: options[:routing_number]
+        Entry.new t
+      end
     end
 
   end
