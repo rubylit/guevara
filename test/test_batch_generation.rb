@@ -24,3 +24,9 @@ test 'generates the entry detail record' do |batch|
 6271031001953ACCOUNT234      0000001600FD00AFA8A0F7   marge baker             1123456780000001
 NACHA
 end
+
+test 'generates the batch contol row' do |batch|
+  debugger_equal batch.to_s.lines.to_a.last, <<NACHA
+82000000010010310019000000001600000000000000   Ruby123                         123456780000001
+NACHA
+end

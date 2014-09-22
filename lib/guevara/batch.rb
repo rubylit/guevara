@@ -7,20 +7,20 @@ module Guevara
     ACCOUNT_TYPE_CODE     = { 'checking' => '2', 'saving' => '3' }
     TRANSACTION_TYPE_CODE = { 'credit' => '2', 'debit' => '7' }
 
-    attr_reader :options, :transactions
+    attr_reader :attributes, :transactions
 
-    def initialize(transactions, options)
+    def initialize(transactions, attributes)
       @transactions = transactions
-      self.options  = options
+      self.attributes  = attributes
     end
 
-    def options= options
-      default_options = {
+    def attributes= attributes
+      default_attributes = {
         discretionary_data: nil,
         effective_date:     effective_date.strftime("%y%m%d")
       }
-      @options = default_options.merge(options)
-      @options[:date] = Date.parse(options[:date]).strftime("%y%m%d")
+      @attributes = default_attributes.merge(attributes)
+      @attributes[:date] = Date.parse(attributes[:date]).strftime("%y%m%d")
     end
 
     def to_s
@@ -28,6 +28,7 @@ module Guevara
       entries.each do |entry|
         batch << entry.to_s
       end
+      batch << batch_control
       batch.join
     end
 
@@ -42,7 +43,42 @@ module Guevara
               "   1",
               "%<routing_number>8d",
               "%<index>07d",
-              "\n"].join, options
+              "\n"].join, attributes
+    end
+
+    def batch_control
+      attributes[:entry_addenda_count] = entries.size
+      attributes[:entry_hash]          = entry_hash
+      attributes[:total_debit]         = total('debit')
+      attributes[:total_credit]        = total('credit')
+      format ["8",
+              "%<service_class>3d",
+              "%<entry_addenda_count>06d",
+              "%<entry_hash>010d",
+              "%<total_debit>012d",
+              "%<total_credit>012d",
+              "%<company_id>10.10s",
+              " " * 25,
+              "%<routing_number>8d",
+              "%<index>07d",
+              "\n"].join, attributes
+    end
+
+    def entry_hash
+      entries.
+        map{ |e| e.to_s }.
+        select{ |e| e[0] == '6' }. # only use entry detail rows
+        map{ |e| e[3..10].to_i }.  # take only 4-11 places
+        reduce(:+).                # sum
+        modulo(10_000_000_000)     # cap to 10 digits
+    end
+
+    def total type
+      transactions.
+        select{ |t| t[:type] == type }.
+        map{ |t| t[:amount] }.
+        reduce(0, :+).
+        modulo(1_000_000_000_000)
     end
 
     def effective_date
@@ -52,7 +88,7 @@ module Guevara
     def entries
       @entries ||= transactions.each_with_index.map do |transaction, index|
         t = transaction.merge index: index + 1,
-                              signature_routing_number: options[:routing_number]
+                              signature_routing_number: attributes[:routing_number]
         Entry.new t
       end
     end
