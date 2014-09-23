@@ -1,21 +1,11 @@
 require 'date'
+require_relative 'row'
 
 module Guevara
-  class FileHeader
-
-    attr_reader :attributes
-
-    def initialize attributes
-      self.attributes = attributes
-      format_attributes
-    end
+  class FileHeader < Row
 
     def default_attributes
       { reference: 0 }
-    end
-
-    def attributes= attr
-      @attributes = default_attributes.merge(attr)
     end
 
     def format_attributes
@@ -36,10 +26,6 @@ module Guevara
        "%<destination_name>23.23s",
        "%<origin_name>23.23s",
        "%<reference>8d"]
-    end
-
-    def to_s
-      format(fields.join, attributes) << "\n"
     end
 
   end

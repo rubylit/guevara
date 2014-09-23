@@ -1,19 +1,20 @@
+require_relative 'row'
+
 module Guevara
-  class Addenda
+  class Addenda < Row
 
-    attr_reader :attributes
-
-    def initialize attributes
-      @attributes = attributes
+    def default_attributes
+      {
+        number: 1 # we should not have more than 1 addenda
+      }
     end
 
-    def to_s
-      format ["7",                         # row type
-              "05",                        # addenda type
-              "%<additional_info>-80.80s",
-              "%<index>04d",
-              "%<entry_number>07d",
-              "\n"].join, attributes
+    def fields
+      ["7",                         # row type
+       "05",                        # addenda type
+       "%<additional_info>-80.80s",
+       "%<number>04d",
+       "%<entry_number>07d"]
     end
 
   end
