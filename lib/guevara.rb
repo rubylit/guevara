@@ -1,5 +1,5 @@
 require 'guevara/version'
 
 module Guevara
-  # Your code goes here...
+  autoload :Nacha, 'guevara/nacha'
 end
