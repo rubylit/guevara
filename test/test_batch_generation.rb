@@ -7,7 +7,7 @@ setup do
     company_name:   'rubylit',
     company_id:     'Ruby123',
     company_date:   '2014-09-18',
-    origin_id:      12345678,
+    origin_id:      '12345678',
     number:         1
 end
 

@@ -10,7 +10,7 @@ setup do
     amount:           1600,
     id:               'FD00AFA8A0F7',
     name:             'marge baker',
-    origin_id:        12345678,
+    origin_id:        '12345678',
     number:           1
   )
 end

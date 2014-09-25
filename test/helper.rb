@@ -10,7 +10,7 @@ def sample_transaction
     additional_info:  'wellsville|KS|66092|101 2nd st|',
     telephone:        '5858232966',
     account_type:     'checking',
-    routing_number:   '103100195',
+    routing_number:   103100195,
     account_number:   '3ACCOUNT234'
   }
 end

@@ -4,8 +4,8 @@ require_relative '../lib/guevara/file_header'
 setup do
   Guevara::FileHeader.new(
     priority_code:    01,
-    destination_id:   12345678,
-    origin_id:        12345678,
+    destination_id:   '12345678',
+    origin_id:        '12345678',
     created_at:       '2014-11-28T13:30',
     id:               'A',
     destination_name: 'Rubylit',
