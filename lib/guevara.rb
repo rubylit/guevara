@@ -1,4 +1,4 @@
-require "guevara/version"
+require 'guevara/version'
 
 module Guevara
   # Your code goes here...

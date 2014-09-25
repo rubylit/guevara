@@ -1,3 +1,6 @@
+lib_path = File.absolute_path(File.join(__FILE__, '..', '..', 'lib'))
+$LOAD_PATH.unshift(lib_path) unless $LOAD_PATH.include? lib_path
+
 def sample_transaction
   {
     id:               'FD00AFA8A0F7',
