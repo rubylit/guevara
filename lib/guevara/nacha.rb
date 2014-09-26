@@ -16,7 +16,7 @@ module Guevara
     end
 
     def file_header
-      FileHeader.new
+      FileHeader.new(
         priority_code:    01,
         destination_id:   '12345678',
         origin_id:        '12345678',
@@ -24,6 +24,7 @@ module Guevara
         id:               'A',
         destination_name: 'Rubylit',
         origin_name:      'Zest'
+      )
     end
 
   end

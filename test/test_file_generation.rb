@@ -1,5 +1,4 @@
 require_relative 'helper.rb'
-p $LOAD_PATH
 require 'guevara'
 
 test 'generates the batch' do |batch|
