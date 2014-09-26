@@ -16,6 +16,7 @@ module Guevara
 
     def to_s
       batch = []
+
       batch << batch_header.to_s
       transactions.each_with_index do |transaction, index|
         batch << entry(transaction, index).to_s
