@@ -13,8 +13,10 @@ module Guevara
     end
 
     def batches= batches
-      @batches = batches.map do |batch|
-        Batch.new(batch[:transactions], batch)
+      @batches = batches.each_with_index.map do |batch_attributes, index|
+        transactions = batch_attributes.delete(:transactions)
+        batch_attributes[:number] = index + 1
+        Batch.new(transactions, batch_attributes)
       end
     end
 

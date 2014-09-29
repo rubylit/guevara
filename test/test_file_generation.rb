@@ -22,8 +22,7 @@ test 'generates the batch' do |batch|
     company_date:   '2014-09-18',
     origin_id:      '12345678',
     effective_date: '2014-09-21',
-    transactions:   [ transaction ],
-    number: 1
+    transactions:   [ transaction ]
   }
 
   nacha = Guevara::Nacha.new(
