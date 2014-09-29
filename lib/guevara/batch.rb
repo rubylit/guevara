@@ -9,8 +9,8 @@ module Guevara
 
     attr_reader :transactions, :attributes
 
-    def initialize(transactions, attributes)
-      @transactions = transactions
+    def initialize(attributes)
+      @transactions = attributes.delete(:transactions)
       @attributes   = attributes
     end
 
