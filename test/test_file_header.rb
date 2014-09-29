@@ -15,7 +15,6 @@ end
 
 test 'generates a full file' do |header|
   debugger_equal header.to_s, <<NACHA
-101001234567800123456781411281330A094101                Rubylit                   Zest       0
+101 012345678 0123456781411281330A094101                Rubylit                   Zest       0
 NACHA
 end
-
