@@ -41,7 +41,7 @@ module Guevara
       entry_count = total { |b| b.batch_control.attributes[:entry_count] }
       block_count = entry_count + batches.size * 2 + 2
       FileControl.new(
-        batch_count:  batches.size,
+        batch_count:  batches.count,
         block_count:  block_count,
         entry_count:  entry_count,
         entry_hash:   total { |b| b.batch_control.attributes[:entry_hash] },

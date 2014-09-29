@@ -15,6 +15,10 @@ def sample_transaction
   }
 end
 
+def lines(nacha)
+  nacha.to_s.lines.to_a
+end
+
 def sample_batch
   {
     service_class:  '200',
