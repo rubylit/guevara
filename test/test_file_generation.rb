@@ -2,40 +2,6 @@ require_relative 'helper.rb'
 require 'guevara'
 
 test 'generates the batch' do |batch|
-
-  transaction = {
-    id:               'FD00AFA8A0F7',
-    type:             'debit',
-    amount:           1600,
-    name:             'marge baker',
-    additional_info:  'wellsville|KS|66092|101 2nd st|',
-    telephone:        '5858232966',
-    account_type:     'checking',
-    routing_number:   103100195,
-    account_number:   '3ACCOUNT234'
-  }
-
-  batch = {
-    service_class:  '200',
-    company_name:   'rubylit',
-    company_id:     'Ruby123',
-    company_date:   '2014-09-18',
-    origin_id:      '12345678',
-    effective_date: '2014-09-21',
-    transactions:   [ transaction ]
-  }
-
-  nacha = Guevara::Nacha.new(
-    priority_code:    01,
-    destination_id:   '12345678',
-    origin_id:        '12345678',
-    created_at:       '2014-11-28T13:30',
-    id:               'A',
-    destination_name: 'Rubylit',
-    origin_name:      'Zest',
-    batches:          [ batch ]
-  )
-
   expected = <<NACHA
 101001234567800123456781411281330A094101                Rubylit                   Zest       0
 5200rubylit                                Ruby123PPD          140918140921   1123456780000001
@@ -45,8 +11,9 @@ test 'generates the batch' do |batch|
 9000001000006000000020010310019000000001600000000000000                                       
 NACHA
 
+  nacha = Guevara::Nacha.new sample_nacha
+
   nacha.to_s.lines.to_a.each_with_index do |line, index|
     debugger_equal line, expected.lines.to_a[index]
   end
-
 end
