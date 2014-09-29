@@ -24,3 +24,13 @@ test 'file control row gets the number of batches' do
 
   assert_equal lines(nacha).last[1,6].to_i, 2
 end
+
+test 'all the batches are added to the file' do
+  batches = 5.times.map do
+    sample_batch
+  end
+  nacha_attributes = sample_nacha.merge(:batches => batches)
+
+  nacha = Guevara::Nacha.new nacha_attributes
+  assert lines(nacha).size > 10
+end
