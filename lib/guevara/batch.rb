@@ -27,8 +27,7 @@ module Guevara
     end
 
     def batch_header
-      header_attributes = { effective_date: effective_date }.merge(attributes)
-      BatchHeader.new header_attributes
+      BatchHeader.new attributes
     end
 
     def batch_control
@@ -54,10 +53,6 @@ module Guevara
         map{ |t| t[:amount] }.
         reduce(0, :+).
         modulo(1_000_000_000_000)
-    end
-
-    def effective_date
-      transactions.first[:effective_date]
     end
 
     def entry transaction, index

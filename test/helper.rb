@@ -7,7 +7,6 @@ def sample_transaction
     type:             'debit',
     amount:           1600,
     name:             'marge baker',
-    effective_date:   '2014-09-21',
     additional_info:  'wellsville|KS|66092|101 2nd st|',
     telephone:        '5858232966',
     account_type:     'checking',
