@@ -5,7 +5,7 @@ module Guevara
   class BatchHeader < Row
 
     def default_attributes
-      { discretionary_data: '' }
+      {}
     end
 
     def format_attributes
@@ -21,7 +21,8 @@ module Guevara
        "%<company_name>-16.16s",
        "%<discretionary_data>-20.20s",
        "%<company_id>10.10s",
-       "PPD          ",
+       "PPD",
+       "%<company_entry_description>s",
        "%<company_date>s",
        "%<effective_date>s",
        "   1",
