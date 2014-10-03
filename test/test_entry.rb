@@ -2,7 +2,7 @@ require_relative 'helper.rb'
 require_relative '../lib/guevara/entry'
 
 setup do
-  Guevara::Entry.new(
+  {
     type:             'debit',
     account_type:     'checking',
     routing_number:   103100195,
@@ -12,11 +12,19 @@ setup do
     name:             'marge baker',
     origin_id:        '12345678',
     number:           1
-  )
+  }
 end
 
-test 'generates the entry detail record' do |entry_record|
+test 'generates the entry detail record' do |entry_attrs|
+  entry_record = Guevara::Entry.new entry_attrs
   debugger_equal entry_record.to_s, <<NACHA
 6271031001953ACCOUNT234      0000001600FD00AFA8A0F7   marge baker             1123456780000001
+NACHA
+end
+
+test 'routing number with leading zeroes if they are removed' do |entry_attrs|
+  entry_record = Guevara::Entry.new entry_attrs.merge(:routing_number => 195)
+  debugger_equal entry_record.to_s, <<NACHA
+6270000001953ACCOUNT234      0000001600FD00AFA8A0F7   marge baker             1123456780000001
 NACHA
 end
