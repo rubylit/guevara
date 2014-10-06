@@ -24,7 +24,7 @@ module Guevara
        "%<discretionary_data>-20.20s",
        "%<company_id>10.10s",
        "PPD",
-       "%<company_entry_description>s",
+       "%<entry_description>s",
        "%<company_date>s",
        "%<effective_date>s",
        "   1",
