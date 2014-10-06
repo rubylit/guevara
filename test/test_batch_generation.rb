@@ -2,10 +2,11 @@ require_relative 'helper.rb'
 require_relative '../lib/guevara/batch'
 
 setup do
-  Guevara::Batch.new sample_batch.merge(:number => 1)
+  sample_batch.merge(:number => 1)
 end
 
-test 'generates the batch' do |batch|
+test 'generates the batch' do |attributes|
+  batch = Guevara::Batch.new attributes
   expected = <<NACHA
 5200rubylit         abcdefghijklmnopqrst   Ruby123PPD7166666666140918140921   1123456780000001
 6271031001953ACCOUNT234      0000001600FD00AFA8A0F7   marge baker             1123456780000001

@@ -2,7 +2,7 @@ require_relative 'helper.rb'
 require_relative '../lib/guevara/batch_header'
 
 setup do
-  Guevara::BatchHeader.new(
+  {
     service_class:  '200',
     company_name:   'rubylit',
     company_id:     '7654321',
@@ -12,10 +12,12 @@ setup do
     number:         1,
     discretionary_data: 'abcdefghijklmnopqrst',
     company_entry_description: '7166666666'
-  )
+  }
 end
 
-test 'generates the batch header' do |batch_header|
+test 'generates the batch header' do |attributes|
+  batch_header = Guevara::BatchHeader.new attributes
+
   debugger_equal batch_header.to_s, <<NACHA
 5200rubylit         abcdefghijklmnopqrst   7654321PPD7166666666140918140921   1123456780000001
 NACHA
