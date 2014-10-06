@@ -21,13 +21,14 @@ end
 
 def sample_batch
   {
-    service_class:  '200',
-    company_name:   'rubylit',
-    company_id:     'Ruby123',
-    company_date:   '2014-09-18',
-    origin_id:      '12345678',
-    effective_date: '2014-09-21',
-    transactions:   [ sample_transaction ]
+    service_class:     '200',
+    company_name:      'rubylit',
+    company_id:        'Ruby123',
+    entry_description: 'payments',
+    company_date:      '2014-09-18',
+    origin_id:         '12345678',
+    effective_date:    '2014-09-21',
+    transactions:      [ sample_transaction ]
   }
 end
 
