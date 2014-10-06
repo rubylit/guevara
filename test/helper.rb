@@ -24,7 +24,7 @@ def sample_batch
     service_class:     '200',
     company_name:      'rubylit',
     company_id:        'Ruby123',
-    entry_description: '7166666666',
+    entry_description: 'payments',
     company_date:      '2014-09-18',
     origin_id:         '12345678',
     effective_date:    '2014-09-21',
