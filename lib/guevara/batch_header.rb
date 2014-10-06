@@ -5,7 +5,9 @@ module Guevara
   class BatchHeader < Row
 
     def default_attributes
-      {}
+      {
+        discretionary_data: ''
+      }
     end
 
     def format_attributes

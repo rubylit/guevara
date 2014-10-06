@@ -28,7 +28,6 @@ def sample_batch
     origin_id:      '12345678',
     effective_date: '2014-09-21',
     transactions:   [ sample_transaction ],
-    discretionary_data: 'abcdefghijklmnopqrst',
     company_entry_description: '7166666666'
   }
 end
