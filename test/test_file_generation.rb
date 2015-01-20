@@ -7,7 +7,7 @@ end
 
 test 'generates nacha sample file' do
   expected = <<NACHA
-101 012345678 0123456781411281330A094101                Rubylit                   Zest       0
+101  12345678  123456781411281330A094101                Rubylit                   Zest       0
 5200rubylit                                Ruby123PPD  payments140918140921   1123456780000001
 6271031001953ACCOUNT234      0000001600FD00AFA8A0F7   marge baker             1123456780000001
 705wellsville|KS|66092|101 2nd st|                                                 00010000001

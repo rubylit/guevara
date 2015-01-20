@@ -12,13 +12,13 @@ module Guevara
 
     def fields
       ["6%<transaction_code>2d",
-       "%<routing_number>09d",
+       "%<routing_number>9s",
        "%<account_number>-17.17s",
        "%<amount>010d",
        "%<id>-15.15s",
        "%<name>-22.22s",
        "  1",  # Addenda record indicator
-       "%<origin_id>8d",
+       "%<origin_id>8s",
        "%<number>07d"]
     end
 

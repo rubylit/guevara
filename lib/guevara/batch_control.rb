@@ -16,7 +16,7 @@ module Guevara
        "%<total_credit>012d",
        "%<company_id>10.10s",
        " " * 25,  # Authentication and reserved fields.
-       "%<origin_id>8d",
+       "%<origin_id>8s",
        "%<number>07d"]
     end
 
