@@ -28,7 +28,7 @@ module Guevara
        "%<company_date>s",
        "%<effective_date>s",
        "   1",
-       "%<origin_id>8d",
+       "%<origin_id>8s",
        "%<number>07d"]
     end
 

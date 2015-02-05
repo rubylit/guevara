@@ -16,8 +16,8 @@ module Guevara
     def fields
       ["1",
        "%<priority_code>02d",
-       " %<destination_id>09d",
-       " %<origin_id>09d",
+       "%<destination_id>10s",
+       "%<origin_id>10s",
        "%<created_at>10.10s",
        "%<id>1.1s",
        "094", # record size is fixed
