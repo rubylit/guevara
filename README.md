@@ -1,6 +1,6 @@
 [![Gem Version](http://img.shields.io/gem/v/guevara.svg)](http://badge.fury.io/rb/guevara)
 [![Build Status](http://img.shields.io/travis/rubylit/guevara.svg)](https://travis-ci.org/rubylit/guevara)
-[![Code Climate](http://img.shields.io/codeclimate/github/rubylit/guevara.svg)](https://codeclimate.com/github/rubylit/guevara)
+[![Code Climate](https://img.shields.io/codeclimate/maintainability/rubylit/guevara)](https://codeclimate.com/github/rubylit/guevara)
 [![Inline docs](http://inch-ci.org/github/rubylit/guevara.png?branch=master)](http://inch-ci.org/github/rubylit/guevara)
 
 # Guevara
