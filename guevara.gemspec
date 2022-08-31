@@ -11,14 +11,11 @@ Gem::Specification.new do |spec|
   spec.summary       = %q{Build nacha files.}
   spec.description   = %q{Hide the uglyness of nacha file format.}
   spec.homepage      = "http://github.com/rubylit/guevara"
-  spec.license       = "GPL"
+  spec.license       = "GPL-3.0-or-later"
 
-  spec.files         = `git ls-files -z`.split("\x0")
-  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
-  spec.require_paths = ["lib"]
+  spec.files         = Dir['lib/**/*.rb']
 
-  spec.add_development_dependency "bundler", "~> 1.6"
-  spec.add_development_dependency "rake"
-  spec.add_development_dependency "cutest", "~>1.2"
+  spec.add_development_dependency "bundler", "~> 2.2", ">= 2.2.10"
+  spec.add_development_dependency "rake",    "~> 13.0"
+  spec.add_development_dependency "cutest",  "~>1.2"
 end
