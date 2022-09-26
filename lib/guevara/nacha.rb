@@ -39,7 +39,9 @@ module Guevara
 
     def file_control
       entry_count = total { |b| b.batch_control.attributes[:entry_count] }
-      block_count = entry_count + batches.size * 2 + 2
+      total_count = entry_count + batches.size * 2 + 2
+      block_count = (total_count/10.0).ceil # Count of the number of blocks of 10 rows within the file. https://achdevguide.nacha.org/ach-file-details
+
       FileControl.new(
         batch_count:  batches.count,
         block_count:  block_count,
