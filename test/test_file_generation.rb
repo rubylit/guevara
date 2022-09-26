@@ -12,7 +12,7 @@ test 'generates nacha sample file' do
 6271031001953ACCOUNT234      0000001600FD00AFA8A0F7   marge baker             1123456780000001
 705wellsville|KS|66092|101 2nd st|                                                 00010000001
 82000000020010310019000000001600000000000000   Ruby123                         123456780000001
-9000001000006000000020010310019000000001600000000000000                                       
+9000001000001000000020010310019000000001600000000000000                                       
 NACHA
   nacha = Guevara::Nacha.new sample_nacha
 
@@ -49,4 +49,40 @@ test 'all the batches are added to the file' do
 
   nacha = Guevara::Nacha.new nacha_attributes
   assert lines(nacha).size > 10
+end
+
+test 'calculate block_count (22 lines => 3 block_count)' do
+  expected = <<NACHA
+101  12345678  123456781411281330A094101                Rubylit                   Zest       0
+5200rubylit                                Ruby123PPD  payments140918140921   1123456780000001
+6271031001953ACCOUNT234      0000001600FD00AFA8A0F7   marge baker             1123456780000001
+705wellsville|KS|66092|101 2nd st|                                                 00010000001
+82000000020010310019000000001600000000000000   Ruby123                         123456780000001
+5200rubylit                                Ruby123PPD  payments140918140921   1123456780000002
+6271031001953ACCOUNT234      0000001600FD00AFA8A0F7   marge baker             1123456780000001
+705wellsville|KS|66092|101 2nd st|                                                 00010000001
+82000000020010310019000000001600000000000000   Ruby123                         123456780000002
+5200rubylit                                Ruby123PPD  payments140918140921   1123456780000003
+6271031001953ACCOUNT234      0000001600FD00AFA8A0F7   marge baker             1123456780000001
+705wellsville|KS|66092|101 2nd st|                                                 00010000001
+82000000020010310019000000001600000000000000   Ruby123                         123456780000003
+5200rubylit                                Ruby123PPD  payments140918140921   1123456780000004
+6271031001953ACCOUNT234      0000001600FD00AFA8A0F7   marge baker             1123456780000001
+705wellsville|KS|66092|101 2nd st|                                                 00010000001
+82000000020010310019000000001600000000000000   Ruby123                         123456780000004
+5200rubylit                                Ruby123PPD  payments140918140921   1123456780000005
+6271031001953ACCOUNT234      0000001600FD00AFA8A0F7   marge baker             1123456780000001
+705wellsville|KS|66092|101 2nd st|                                                 00010000001
+82000000020010310019000000001600000000000000   Ruby123                         123456780000005
+9000005000003000000100051550095000000008000000000000000                                       
+NACHA
+  batches = 5.times.map do
+    sample_batch
+  end
+  nacha_attributes = sample_nacha.merge(:batches => batches)
+
+  nacha = Guevara::Nacha.new nacha_attributes
+  nacha.to_s.lines.to_a.each_with_index do |line, index|
+    debugger_equal line, expected.lines.to_a[index]
+  end
 end
